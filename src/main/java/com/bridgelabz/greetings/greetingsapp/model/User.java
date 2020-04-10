@@ -3,6 +3,7 @@ package com.bridgelabz.greetings.greetingsapp.model;
 public class User {
     private String firstName;
     private String lastName;
+    private String fullName;
 
     public String getFirstName() {
         return firstName;
@@ -18,6 +19,10 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public void setName(String fullname){
+        this.fullName = fullname;
     }
 
     @Override

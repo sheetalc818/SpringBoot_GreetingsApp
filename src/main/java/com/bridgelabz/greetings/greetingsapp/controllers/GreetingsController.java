@@ -1,5 +1,6 @@
 package com.bridgelabz.greetings.greetingsapp.controllers;
 
+import com.bridgelabz.greetings.greetingsapp.GreetingException;
 import com.bridgelabz.greetings.greetingsapp.model.Greeting;
 import com.bridgelabz.greetings.greetingsapp.model.User;
 import com.bridgelabz.greetings.greetingsapp.services.IGreetingServices;
@@ -20,6 +21,8 @@ public class GreetingsController {
     @Autowired
     private IGreetingServices greetingService;
 
+    User user = new User();
+
     @GetMapping("/get/greeting")
     public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
         return new Greeting(counter.incrementAndGet(),
@@ -28,7 +31,6 @@ public class GreetingsController {
 
     @PostMapping("/post/adduser")
     public Greeting greetingGet(@RequestParam(value = "fname") String firstname, @RequestParam(value = "lname")String lastname){
-        User user = new User();
         user.setFirstName(firstname);
         user.setLastName(lastname);
         return greetingService.addGreeting(user);
@@ -39,13 +41,26 @@ public class GreetingsController {
         return greetingService.getAllUser();
     }
 
-    @PostMapping("/post/greeting")
-    public Greeting greeting(@RequestBody Greeting greeting) {
-        return new Greeting(counter.incrementAndGet(), String.format(template, greeting.getMessage()));
+    @GetMapping("/get/findbyid")
+    public Greeting getUserById(@RequestParam(value = "id")long id) throws GreetingException {
+        return greetingService.getGreetingById(id);
     }
 
     @PutMapping("/put/greeting")
     public ResponseEntity<Greeting> putGreeting(@RequestBody Greeting greeting) {
         return new ResponseEntity<>(greeting, HttpStatus.OK);
+    }
+
+    //localhost:8081/greeting/update/id/?firstName=Sheetal&lastName=Chaudhari
+    @PutMapping("/update")
+    public String updateGreeting(@RequestParam(value = "id") long id, @RequestParam(value = "firstName") String firstName, @RequestParam(value = "lastName") String lastName) {
+        greetingService.UpdateById(id, firstName, lastName);
+        return "Greeting Updated Successfully";
+    }
+
+    @DeleteMapping("/delete")
+    public String deleteGreeting(@RequestParam(value = "id")long id) throws GreetingException {
+        greetingService.deleteGreetingById(id);
+        return "Greeting deleted Successfully";
     }
 }
