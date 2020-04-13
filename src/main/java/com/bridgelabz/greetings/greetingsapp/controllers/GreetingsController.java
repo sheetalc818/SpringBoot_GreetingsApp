@@ -1,6 +1,6 @@
 package com.bridgelabz.greetings.greetingsapp.controllers;
 
-import com.bridgelabz.greetings.greetingsapp.GreetingException;
+import com.bridgelabz.greetings.greetingsapp.exceptions.GreetingException;
 import com.bridgelabz.greetings.greetingsapp.model.Greeting;
 import com.bridgelabz.greetings.greetingsapp.model.User;
 import com.bridgelabz.greetings.greetingsapp.services.IGreetingServices;

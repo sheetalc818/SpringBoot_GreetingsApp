@@ -1,10 +1,10 @@
-package com.bridgelabz.greetings.greetingsapp;
+package com.bridgelabz.greetings.greetingsapp.exceptions;
 
 public class GreetingException extends Exception {
     public ExceptionType type;
 
     public enum ExceptionType {
-        NO_Id_Exist;
+        No_Id_Exist;
     }
     public GreetingException(String message, ExceptionType type) {
         super(message);

@@ -1,6 +1,6 @@
 package com.bridgelabz.greetings.greetingsapp.services.implementation;
 
-import com.bridgelabz.greetings.greetingsapp.GreetingException;
+import com.bridgelabz.greetings.greetingsapp.exceptions.GreetingException;
 import com.bridgelabz.greetings.greetingsapp.model.Greeting;
 import com.bridgelabz.greetings.greetingsapp.model.User;
 import com.bridgelabz.greetings.greetingsapp.repository.IGreetingRepository;
@@ -38,7 +38,7 @@ public class GreetingService implements IGreetingServices {
     @Override
     public Greeting getGreetingById(long id) throws GreetingException {
         if (!greetingRepository.existsById(id)){
-            throw new GreetingException("Id_is_not_Exist",GreetingException.ExceptionType.NO_Id_Exist);
+            throw new GreetingException("Id_is_not_Exist",GreetingException.ExceptionType.No_Id_Exist);
         }
         return greetingRepository.findById(id).get();
     }
@@ -53,7 +53,7 @@ public class GreetingService implements IGreetingServices {
     @Override
     public void deleteGreetingById(long id) throws GreetingException {
         if (!greetingRepository.existsById(id)) {
-            throw new GreetingException("Id_is_not_Exist",GreetingException.ExceptionType.NO_Id_Exist);
+            throw new GreetingException("Id_is_not_Exist",GreetingException.ExceptionType.No_Id_Exist);
         }
         greetingRepository.deleteById(id);
     }
